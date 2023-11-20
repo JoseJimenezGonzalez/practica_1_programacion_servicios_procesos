@@ -119,18 +119,22 @@ public class Restaurante {
                         if(numeroComidaMostrador[idTipo] > cantidadDeseadaAux){
                             numeroComidaMostrador[idTipo] -= cantidadDeseadaAux;
                             totalComidaVendida[idTipo] += cantidadDeseadaAux;
+                            System.out.println("El cliente con id: " + idCliente + " ha cogido " + cantidadDeseadaAux + " de " + tipo);
                             atendido = true;
                         }else if(numeroComidaMostrador[idTipo] == cantidadDeseadaAux){
                             totalComidaVendida[idTipo] += cantidadDeseadaAux;
                             numeroComidaMostrador[idTipo] = 0;
+                            System.out.println("El cliente con id: " + idCliente + " ha cogido " + cantidadDeseadaAux + " de " + tipo);
                             atendido = true;
                         }else if(numeroComidaMostrador[idTipo] == 0){
-                            System.out.println("No hay pizzas en el mostrador");
+                            System.out.println("El cliente con id: " + idCliente + " no ha cogido ningun/a " + tipo + " porque no hay.");
                         }else{
                             cantidadDeseadaAux -= numeroComidaMostrador[idTipo];
                             totalComidaVendida[idTipo] += numeroComidaMostrador[idTipo];
                             numeroComidaMostrador[idTipo] = 0;
+                            System.out.println("El cliente con id: " + idCliente + " ha cogido " + cantidadDeseadaAux + " de " + tipo +". Todavía le falta por coger, va a esperar hasta que se reponga el stock.");
                         }
+                        System.out.println("Quedan " + numeroComidaMostrador[idTipo] + " de " + tipo);
                         semaforoMostrador[idTipo].release();
                     }
                     recaudacion.acquire();
