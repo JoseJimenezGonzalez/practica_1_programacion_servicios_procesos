@@ -41,7 +41,7 @@ public class Restaurante {
                     //Incremento la cantidad de pizzas disponibles en mostrador
                     Restaurante.semaforoMostrador[0].acquire();
                     Restaurante.numeroComidaMostrador[0]++;
-                    System.out.println("Hay una pizza lista, rápido que se enfría");
+                    System.out.println("Pizza añadida");
                     System.out.println("En el mostrador hay " + numeroComidaMostrador[0] + " pizzas");
                     Restaurante.semaforoMostrador[0].release();
                 } catch (InterruptedException e) {
@@ -56,19 +56,22 @@ public class Restaurante {
         public void run() {
             while (restauranteAbierto){
                 try {
-                    //Cortar pan, son 2 segundos
+                    //Cortar pan, son 1 segundo
                     System.out.println("El bocatero está cortando el pan");
-                    Thread.sleep(2000);
-                    //Poner los ingredientes, es 1 segundo
-                    System.out.println("Bocatero añadiendo los ingredientes");
                     Thread.sleep(1000);
-                    //Calentar el bocata, son 5 segundos
-                    System.out.println("Bocatero calentado el bocadillo");
-                    Thread.sleep(5000);
+                    //Poner la mayonesa en el pan, es 1 segundo
+                    System.out.println("Bocatero añadiendo la mayonesa");
+                    Thread.sleep(1000);
+                    //Poner el resto de ingredientes, son 2 segundos
+                    System.out.println("Bocatero está poniendo el resto de ingredientes");
+                    Thread.sleep(2000);
+                    //Envolver el bocadillo, son 3 segundos
+                    System.out.println("El bocatero está envolviendo el bocata.");
+                    Thread.sleep(3000);
                     //Incremento la cantidad de bocatas disponibles en mostrador
                     Restaurante.semaforoMostrador[1].acquire();
                     Restaurante.numeroComidaMostrador[1]++;
-                    System.out.println("Hay un bocata listo, rápido que se enfría");
+                    System.out.println("Bocata añadido");
                     System.out.println("En el mostrador hay " + numeroComidaMostrador[1] + " bocatas");
                     Restaurante.semaforoMostrador[1].release();
                 } catch (InterruptedException e) {
@@ -113,7 +116,7 @@ public class Restaurante {
                 System.out.println("Estoy pensando...");//Ya piensa despues 10 segundos
                 System.out.println("Quiero " + cantidadDeseada + " de " + tipo + ".");
                     while (!atendido){
-                        Thread.sleep(5000);
+                        Thread.sleep(10000);
                         semaforoMostrador[idTipo].acquire();
                         //Opciones
                         if(numeroComidaMostrador[idTipo] > cantidadDeseadaAux){
